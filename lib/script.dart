@@ -1,27 +1,19 @@
 import 'package:ants/component.dart';
 import 'package:flutter/material.dart';
 
-class script extends StatelessWidget {
-  const script({super.key});
+class Message {
+  final String text;
+  final bool isMe;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 233, 231, 226),
-      appBar: AppBar(
-        title: const Text('Chemicals'),
-        backgroundColor: const Color.fromARGB(255, 68, 107, 103),
-      ),
-      body: ListView.builder(
-        itemCount: messages.length,
-        itemBuilder: (context, index) {
-          final message = messages[index];
-          return MessageWidget(message: message);
-        },
-      ),
-    );
-  }
+  Message({required this.text, required this.isMe});
 }
+
+List<Message> messages = [
+  Message(text: "Hello", isMe: true),
+  Message(text: "Hi there!", isMe: false),
+  Message(text: 'Call for work', isMe: true),
+  Message(text: '22', isMe: false)
+];
 
 class MessageWidget extends StatelessWidget {
   final Message message;
@@ -45,6 +37,105 @@ class MessageWidget extends StatelessWidget {
           message.text,
           style: const TextStyle(color: Colors.white),
         ),
+      ),
+    );
+  }
+}
+
+class Script extends StatefulWidget {
+  @override
+  _ScriptState createState() => _ScriptState();
+}
+
+class _ScriptState extends State<Script> {
+  List<Message> messages = [];
+
+  String? selectedChoice; // Store the selected choice
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 233, 231, 226),
+      appBar: AppBar(
+        title: const Text('Chemicals'),
+        backgroundColor: const Color.fromARGB(255, 68, 107, 103),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                final message = messages[index];
+                return MessageWidget(message: message);
+              },
+            ),
+          ),
+          Column(
+            children: [
+              ChoiceChip(
+                label: Text('Choice 1'),
+                selected: selectedChoice == 'Choice 1',
+                onSelected: (selected) {
+                  setState(() {
+                    selectedChoice = selected ? 'Choice 1' : null;
+                  });
+                },
+              ),
+              SizedBox(width: 10), // Add some spacing between ChoiceChips
+              ChoiceChip(
+                label: Text('Choice 2'),
+                selected: selectedChoice == 'Choice 2',
+                onSelected: (selected) {
+                  setState(() {
+                    selectedChoice = selected ? 'Choice 2' : null;
+                  });
+                },
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color.fromARGB(255, 237, 238, 238),
+                  ),
+                  child: TextFormField(
+                    decoration: InputDecoration(hintText: "  here..."),
+                  ),
+                  width: 510,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  // Check if a choice is selected
+                  if (selectedChoice != null) {
+                    // Create a message based on the selected choice
+                    final isMe = selectedChoice == 'Choice 1';
+                    final message = Message(
+                      text: 'You chose: $selectedChoice',
+                      isMe: isMe,
+                    );
+
+                    // Add the message to the chat
+                    setState(() {
+                      messages.add(message);
+                    });
+
+                    // Clear the selected choice
+                    setState(() {
+                      selectedChoice = null;
+                    });
+                  }
+                },
+                icon: Icon(Icons.arrow_forward_ios),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
