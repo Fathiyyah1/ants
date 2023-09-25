@@ -71,28 +71,37 @@ class _ScriptState extends State<Script> {
               },
             ),
           ),
-          Column(
-            children: [
-              ChoiceChip(
-                label: Text('Choice 1'),
-                selected: selectedChoice == 'Choice 1',
-                onSelected: (selected) {
-                  setState(() {
-                    selectedChoice = selected ? 'Choice 1' : null;
-                  });
-                },
-              ),
-              SizedBox(width: 10), // Add some spacing between ChoiceChips
-              ChoiceChip(
-                label: Text('Choice 2'),
-                selected: selectedChoice == 'Choice 2',
-                onSelected: (selected) {
-                  setState(() {
-                    selectedChoice = selected ? 'Choice 2' : null;
-                  });
-                },
-              ),
-            ],
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ChoiceChip(
+                  label: Text('Choice 1'),
+                  selected: selectedChoice == 'Choice 1',
+                  onSelected: (selected) {
+                    setState(() {
+                      selectedChoice = selected ? 'Choice 1' : null;
+                    });
+                  },
+                ),
+                SizedBox(
+                  width: 10,
+                  height: 10,
+                ), // Add some spacing between ChoiceChips
+                ChoiceChip(
+                  label: Text('Choice 2'),
+                  selected: selectedChoice == 'Choice 2',
+                  onSelected: (selected) {
+                    setState(() {
+                      selectedChoice = selected ? 'Choice 2' : null;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Row(
             children: [
