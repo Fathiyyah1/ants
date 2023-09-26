@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1062773916324",
+    "project_id": "ants-a11a7",
+    "storage_bucket": "ants-a11a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062773916324:android:7b4da3197819cc325d9c31",
+        "android_client_info": {
+          "package_name": "com.example.ants"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRd1i6-rD0sn8ztugVYRx7m_4QPucamEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
