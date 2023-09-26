@@ -39,11 +39,11 @@ class _ChatPageState extends State<ChatPage> {
                       child: IconButton(
                           onPressed: () async {
                             if (questionCont.text.isNotEmpty) {
-                              messages.add(
-                                  Message(isMe: true, data: questionCont.text));
+                              String question = questionCont.text;
+                              messages.add(Message(isMe: true, data: question));
+                              questionCont.clear();
                               setState(() {});
-                              String response =
-                                  await chatResponse(questionCont.text);
+                              String response = await chatResponse(question);
                               setState(() {});
                               messages
                                   .add(Message(isMe: false, data: response));
@@ -56,18 +56,20 @@ class _ChatPageState extends State<ChatPage> {
             ],
           ),
         ),
-        body: messages.isNotEmpty
-            ? Column(
-                children: messages.map((msg) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(msg.isMe ? "Me said:" : "Anoot said:"),
-                      Text(msg.data)
-                    ],
-                  );
-                }).toList(),
-              )
-            : Center(child: Text("Yalla send a question!")));
+        body: Center(
+          child: messages.isNotEmpty
+              ? Column(
+                  children: messages.map((msg) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(msg.isMe ? "I said:" : "Anoot said:"),
+                        Text(msg.data)
+                      ],
+                    );
+                  }).toList(),
+                )
+              : Text("Yalla send a question!"),
+        ));
   }
 }
