@@ -50,8 +50,7 @@ class Script extends StatefulWidget {
 class _ScriptState extends State<Script> {
   List<Message> messages = [];
 
-  String? selectedChoice; // Store the selected choice
-
+  String? selectedChoice;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,10 +83,10 @@ class _ScriptState extends State<Script> {
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                   height: 10,
-                ), // Add some spacing between ChoiceChips
+                ),
                 ChoiceChip(
                   label: Text('Choice 2'),
                   selected: selectedChoice == 'Choice 2',
@@ -100,7 +99,7 @@ class _ScriptState extends State<Script> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -110,37 +109,33 @@ class _ScriptState extends State<Script> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color.fromARGB(255, 237, 238, 238),
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(hintText: "  here..."),
+                    color: const Color.fromARGB(255, 237, 238, 238),
                   ),
                   width: 510,
+                  child: TextFormField(
+                    decoration: const InputDecoration(hintText: "  here..."),
+                  ),
                 ),
               ),
               IconButton(
                 onPressed: () {
-                  // Check if a choice is selected
                   if (selectedChoice != null) {
-                    // Create a message based on the selected choice
                     final isMe = selectedChoice == 'Choice 1';
                     final message = Message(
                       text: 'You chose: $selectedChoice',
                       isMe: isMe,
                     );
 
-                    // Add the message to the chat
                     setState(() {
                       messages.add(message);
                     });
 
-                    // Clear the selected choice
                     setState(() {
                       selectedChoice = null;
                     });
                   }
                 },
-                icon: Icon(Icons.arrow_forward_ios),
+                icon: const Icon(Icons.arrow_forward_ios),
               )
             ],
           ),
