@@ -1,6 +1,6 @@
 # ants
 
-A new Flutter project.
+A new Flutter project that represents a chat service to understand ants chemical signals 
 
 ## Getting Started
 
